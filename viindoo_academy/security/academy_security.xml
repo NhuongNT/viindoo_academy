@@ -49,6 +49,6 @@
 		    <field name="model_id" ref="viindoo_academy.model_res_ethnicty"/>
 		    <field name="groups" eval="[(4, ref('viindoo_academy.group_administrator'))]"/>
 		    <field name="domain_force">[(1,'=',1)]</field>
-		</record> -->
+		</record> -->		
     </data>
 </odoo>
