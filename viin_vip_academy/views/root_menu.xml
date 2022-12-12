@@ -1,0 +1,5 @@
+<odoo>
+  <data>
+      <menuitem id="vip_menu_root" sequence="10" name="Academy Class Vip"/>
+  </data>
+</odoo>

@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="accounting_payment_view_tree" model="ir.ui.view">
+            <field name="name">accounting.payment.tree</field>
+            <field name="model">accounting.payment</field>
+            <field name="arch" type="xml">
+                <tree string="Class Tree">
+                    <field name="sequence"/>
+                    <field name="type"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="accounting_payment_action" model="ir.actions.act_window">
+            <field name="name">Phiếu Thu Chi</field>
+            <field name="res_model">accounting.payment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="accounting_payment_menu" action="accounting_payment_action"/>
+    </data>
+</odoo>
