@@ -32,11 +32,24 @@ class EducationStudent(models.Model):
         string='Ethnicity'
         )
     
+    # ethnicity_code=fields.Char(related='ethnicity_id', store=True)
+    
+    ethnicity_code2=fields.Char(compute='_compute_ethnicity_code2', store=True)
+    
     user_id=fields.Many2one(
         comodel_name='res.user',
         string='User ID relate to Student'
         )
-    #
+    
+    enrollment_ids = fields.One2many(
+        comodel_name='education.enrollment',
+        inverse_name='student_id',
+        string='Enrollment',
+        help='The Enrollment that belong to the student',
+        readonly=True
+        )
+    
+    
     # ethnicity_code=fields.Char(related='ethnicty_id.code', store=True)
 #khi thay đổi thì sẽ hồi tố tất cả các bản ghi trước đó
     #
@@ -47,7 +60,11 @@ class EducationStudent(models.Model):
     @api.onchange('ethnicity_id')
     def _onchange_ethnicity_id(self):
             self.country_id = self.ethnicity_id.country_ids[:1]
-#
+
+    @api.depends('ethnicity_id')
+    def _compute_ethnicity_code2(self):
+        for r in self:
+            r.ethnicity_code2 = r.ethnicity_id.code
 # #chỉ khi ethnicty_id thì mới chạy code dưới đây
 #     @api.depends('ethnicity_id')
 #     def _compute_ethnicity_code2(self):

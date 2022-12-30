@@ -4,7 +4,8 @@
         <field name="name">education.class.tree</field>
         <field name="model">education.class</field>
         <field name="arch" type="xml">
-            <tree string="Class Tree" editable="bottom">
+            <tree string="Class Tree" decoration-danger="start_date==today" decoration-warning="end_date==today" decoration-muted="state=='cancelled'">
+            <!-- editable="bottom" trong arch thì sẽ không cho vào form view edit nữa  -->
                 <field name="name"/>
                 <field name="company_id" />
                 <field name="description"/>
@@ -12,7 +13,7 @@
                 <field name="end_date" />                
 	            <field name="student_count" />
                 <field name="historical_student_count" />
-                <field name="state"/>                                                
+                <field name="state" decoration-success="state=='done'" decoration-primary="state=='draft'" widget="badge" />                                                
             </tree>                       
         </field>        
     </record>  
@@ -23,6 +24,13 @@
         <field name="arch" type="xml">
             <form string="Class Form">
                 <header>
+       				
+					<button
+						name="%(viindoo_academy.education_enrollment_single_action)d"
+						type="action" string="Enroll" />
+					<field name="state" widget="statusbar"
+						options="{'clickable': '1'}" />
+					
        				<field name="state" widget="statusbar" />
    				</header>
                 <sheet>
@@ -68,6 +76,15 @@
 	                                <field name='name'></field>
 	                                <field name='create_date'/>
 	                                <field name='create_uid'/>
+	                            </tree>
+	                        </field>		                    
+	                    </page>
+	                    <page name='enrollments' string='Enrollment Students'>
+	                        <field name='enrollment_ids'>
+	                            <tree>
+	                                <field name='student_id'></field>
+	                                <field name='name'></field>
+	                                <field name='date' string='Enrollment Date'/>	                                
 	                            </tree>
 	                        </field>		                    
 	                    </page>	                    

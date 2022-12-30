@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 from pip._vendor.typing_extensions import Self
 from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 
 class EducationClass(models.Model):
     _name = 'education.class'
@@ -67,13 +68,24 @@ class EducationClass(models.Model):
         default=lambda self: self.env.company
         )    
     
+    enrollment_ids = fields.One2many(
+        comodel_name='education.enrollment',
+        inverse_name='class_id',
+        string='Enrollment',
+        help='The Enrollment that belong to the class',
+        readonly=True
+        )
+    
+    @api.depends('student_ids')
     def _compute_student_count(self):
         for r in self:
             r.student_count = len(r.student_ids)        
       
     def _compute_historical_student_count(self):
         for r in self:
-            r.historical_student_count = len(r.historical_student_ids)    
+            r.historical_student_count = len(r.historical_student_ids)  
+            
+            
 
 # Constraint là các quy tắc được áp đặt cho các cột dữ liệu trên bảng để giới hạn kiểu dữ liệu được nhập vào. 
 # Đảm bảo tính chính xác, đáng tin cậy cho dữ liệu.
@@ -81,9 +93,11 @@ class EducationClass(models.Model):
 # Python Constraints:
     @api.constrains('start_date','end_date')    
     def _check_date(self):
-        if self.start_date > self.end_date:
-            raise ValidationError("The Start Date must be earlier than End Date.")
-        
+        # if self.start_date > self.end_date:
+        #     raise ValidationError("The Start Date must be earlier than End Date.")
+        for r in self:
+            if r.start_date and r.end_date and r.start_date > r.end_date:
+                raise UserError("The start date must be earlier than End Date")
 #SQL Constraints:
     _sql_constraints =[('class_name_unique', 'unique(name)', "The class name must be unique")]
     # _sql_constraints =[

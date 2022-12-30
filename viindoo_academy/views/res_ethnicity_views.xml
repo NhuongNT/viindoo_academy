@@ -7,7 +7,7 @@
 	            <tree string="Country Ethnicity Tree">
 	                <field name="name"/>
 	                <field name="country_ids" />
-	                <field name="description"/>
+	                <!-- <field name="description"/> -->
 	                                                
 	            </tree>           
 	        </field>        
@@ -27,7 +27,7 @@
 	                    <!-- với phân quyền này thì người k thuộc trong group này thì ngoài tree view có thể nhìn thấy trường country_ids nhưng vào trong form view sẽ không nhìn thấy  -->
 	                    </group>
 	                    <group>
-	                    <field name="description" />
+	                    <!-- <field name="description" /> -->
 	                    </group>
                     </sheet>
         		</form>
@@ -41,7 +41,7 @@
 	            <search string="Country Ethnicity search">
 	                <field name="name"></field>
 	                <field name="country_ids" />
-	                <field name="description"></field>	                              
+	                <!-- <field name="description"></field>	  -->                             
 	            </search>
 	        </field>
 	    </record>

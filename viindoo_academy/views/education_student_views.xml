@@ -44,6 +44,16 @@
 	                            </tree>
 	                        </field>
 	                    </page>
+	                    <page name='enrollments' string='Enrollment Class'>
+	                        <field name='enrollment_ids'>
+	                            <tree>
+	                                <field name='class_id'/>
+	                                <field name='name'/>
+	                                <field name='date' string='Enrollment date'/>
+	                                
+	                            </tree>
+	                        </field>
+	                    </page>
 	                </notebook>
 	                               
                 </sheet>                

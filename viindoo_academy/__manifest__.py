@@ -27,11 +27,18 @@
         'security/ir.model.access.csv',
         'security/academy_security.xml',
         'views/root_menu.xml',
+        'wizard/education_enrollment_wizard_view.xml',
         'views/education_class_views.xml',
         'views/education_class_extend_views.xml',
         'views/education_student_views.xml',
         'views/res_ethnicity_views.xml',
+        'views/education_enrollment_views.xml',
         'views/templates.xml',
+        
+# phải sắp xếp theo trình tự được gọi: nút enroll ở trên class view -> khi chạy class view phải có nút action rồi -> nếu wizard chưa được tạo thì k thể thực hiện đc
+# vậy phải đặt wizard trước class view
+
+
     ],
     # only loaded in demonstration mode
     'demo': [

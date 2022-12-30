@@ -15,7 +15,7 @@ class Ethnicity (models.Model):
         # groups='base.group_user'
     #     )
     # => xong thuộc tính phân quyền: nhóm base sẽ được phân quyền đối với trường này, có thể thêm nhiều nhóm và cách nhau bằng dấu phẩy.
-    description = fields.Text(string='Description')
+    # description = fields.Text(string='Description')
        
     country_ids = fields.Many2many(
         comodel_name='res.country', 
@@ -23,7 +23,10 @@ class Ethnicity (models.Model):
         column1='ethnicity_id',
         column2='country_id',
         )
-    
+    code = fields.Char(
+        string='Code',
+        required='True',
+        )
     # def update_code(self, new_code):
     #     for r in self:
     #         r.new_code = r.code
