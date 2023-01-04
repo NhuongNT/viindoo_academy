@@ -23,10 +23,10 @@ class Ethnicity (models.Model):
         column1='ethnicity_id',
         column2='country_id',
         )
-    code = fields.Char(
-        string='Code',
-        required='True',
-        )
+    # code = fields.Char(
+    #     string='Code',
+    #     required='True',
+    #     )
     # def update_code(self, new_code):
     #     for r in self:
     #         r.new_code = r.code

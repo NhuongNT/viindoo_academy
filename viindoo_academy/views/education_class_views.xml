@@ -6,9 +6,10 @@
         <field name="arch" type="xml">
             <tree string="Class Tree" decoration-danger="start_date==today" decoration-warning="end_date==today" decoration-muted="state=='cancelled'">
             <!-- editable="bottom" trong arch thì sẽ không cho vào form view edit nữa  -->
-                <field name="name"/>
+                <field name="name"/>                
                 <field name="company_id" />
                 <field name="description"/>
+                <field name="course_id"/>
                 <field name="start_date" />
                 <field name="end_date" />                
 	            <field name="student_count" />
@@ -38,7 +39,7 @@
 	                <field name="active" invisible="1"></field>
 	                <div class="oe_title">
 	                    <h1>
-	                        <field name="name" placeholder="Full Name"/>  
+	                        <field name="name" placeholder="Full Name"/>	                          
 	                    </h1>
 	                </div>
 	                
@@ -48,6 +49,7 @@
 	                    </group>
 	                    <group>
 	                        <field name="description" />
+	                        <field name="course_id" />
 	                        <field name="company_id" />	                      
 	                    </group>
 	                    <group>
@@ -79,15 +81,25 @@
 	                            </tree>
 	                        </field>		                    
 	                    </page>
-	                    <page name='enrollments' string='Enrollment Students'>
+	                    <page name='enrollments' string='Enrollment'>
 	                        <field name='enrollment_ids'>
 	                            <tree>
-	                                <field name='student_id'></field>
 	                                <field name='name'></field>
+	                                <field name='student_id'></field>	                                
 	                                <field name='date' string='Enrollment Date'/>	                                
 	                            </tree>
 	                        </field>		                    
-	                    </page>	                    
+	                    </page>
+	                    <page name='enrollment students' string='Enrollment Students'>
+	                        <field name='enrollment_student_ids'>
+	                            <tree>
+	                                
+	                                <field name='name'></field>
+	                                <field name='create_date' />
+	                                <field name='create_uid' />	                                
+	                            </tree>
+	                        </field>		                    
+	                    </page>		                    
 	                </notebook>                
 	            </sheet>
 <!-- 	            <div class='oe_chater'>

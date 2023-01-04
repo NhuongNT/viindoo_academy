@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Student Tree">
                 <field name="name"/>
+                
                 <field name="class_id"/>
                 <field name="country_id"/>                             
             </tree>           
@@ -26,7 +27,8 @@
 	                
 	                <group>
 	                    <group>
-	                        <field name="class_id"/>                        
+	                        <field name="class_id"/>
+	                        <!-- <field name="course_id"/> -->	                                                
 	                    </group>
 	                    <group>
 	                        <field name="country_id"/>
@@ -44,13 +46,29 @@
 	                            </tree>
 	                        </field>
 	                    </page>
-	                    <page name='enrollments' string='Enrollment Class'>
+	                    <page name='enrollments' string='Enrollment'>
 	                        <field name='enrollment_ids'>
-	                            <tree>
-	                                <field name='class_id'/>
+	                            <tree>	                                
 	                                <field name='name'/>
-	                                <field name='date' string='Enrollment date'/>
-	                                
+	                                <field name='date'/>	                                
+	                            </tree>
+	                        </field>
+	                    </page>
+	                    <page name='enrollments class' string='Enrollment Class'>
+	                        <field name='enrollment_class_ids'>
+	                            <tree>
+	                                <field name='name'/>
+	                                <field name='create_date'/>
+	                                <field name='create_uid'/>
+	                            </tree>
+	                        </field>
+	                    </page>
+	                    <page name='course of student' string='Course'>
+	                        <field name='course_ids'>
+	                            <tree>
+	                                <field name='name'/>
+	                                <field name='create_date'/>
+	                                <field name='create_uid'/>
 	                            </tree>
 	                        </field>
 	                    </page>

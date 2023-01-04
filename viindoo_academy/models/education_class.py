@@ -72,10 +72,19 @@ class EducationClass(models.Model):
         comodel_name='education.enrollment',
         inverse_name='class_id',
         string='Enrollment',
-        help='The Enrollment that belong to the class',
         readonly=True
         )
     
+    enrollment_student_ids = fields.Many2many('education.student','enrollment_student_rel',compute='_compute_enrollment_student_ids')
+    
+    course_id = fields.Many2one('education.course',string='Course',required=True)
+    
+    @api.depends('enrollment_ids')
+    def _compute_enrollment_student_ids(self):
+        for lop_hoc in self:
+            lop_hoc.enrollment_student_ids = self.enrollment_ids.student_id
+    
+
     @api.depends('student_ids')
     def _compute_student_count(self):
         for r in self:
@@ -84,11 +93,6 @@ class EducationClass(models.Model):
     def _compute_historical_student_count(self):
         for r in self:
             r.historical_student_count = len(r.historical_student_ids)  
-            
-            
-
-# Constraint là các quy tắc được áp đặt cho các cột dữ liệu trên bảng để giới hạn kiểu dữ liệu được nhập vào. 
-# Đảm bảo tính chính xác, đáng tin cậy cho dữ liệu.
 
 # Python Constraints:
     @api.constrains('start_date','end_date')    

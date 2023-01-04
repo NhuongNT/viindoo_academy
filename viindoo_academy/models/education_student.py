@@ -45,18 +45,25 @@ class EducationStudent(models.Model):
         comodel_name='education.enrollment',
         inverse_name='student_id',
         string='Enrollment',
-        help='The Enrollment that belong to the student',
         readonly=True
         )
-    
-    
-    # ethnicity_code=fields.Char(related='ethnicty_id.code', store=True)
-#khi thay đổi thì sẽ hồi tố tất cả các bản ghi trước đó
-    #
-    # ethnicity_code2=fields.Char(compute='_compute_ethnicity_code2', store=True)
-#nếu compute mà k store thì nó giống như related
-# nếu không depend vào chính xác trường thay đổi thì sẽ k bị gọi hồi tố
 
+    enrollment_class_ids = fields.Many2many('education.class','enrollment_class_rel', compute='_compute_enrollment_class_ids')
+    
+    # course_id = fields.Many2one('education.course',string='Course')
+    course_ids = fields.Many2many(
+        'education.course',
+        'course_student_rel',
+        column1='student_id',
+        column2='course_id',
+        string='Courses'
+        ) 
+    
+    @api.depends('enrollment_ids')
+    def _compute_enrollment_class_ids(self):
+        for std in self:
+            std.enrollment_class_ids = self.enrollment_ids.class_id
+            
     @api.onchange('ethnicity_id')
     def _onchange_ethnicity_id(self):
             self.country_id = self.ethnicity_id.country_ids[:1]
