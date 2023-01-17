@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="res.groups" id="group_user">
+            <field name="name">User</field>
+            <field name="category_id" ref="base.module_category_academy"/>
+        </record>
+        <record model="res.groups" id="group_administrator">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="base.module_category_academy"/>
+            <!-- <field name="users" eval="[(4, ref('base.user_admin'))]" -->
+            <!-- <field name="users" eval="[(4, ref('base.user_root'))]" -->
+        </record>
+		<record id="education_class_rule_internal_user" model="ir.rule">
+		    <field name="name">Internal user can read own class only</field>
+		    <field name="model_id" ref="viindoo_academy.model_education_class"/>
+		    <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+		    <field name="perm_read" eval="1"/>
+		    <field name="perm_write" eval="0"/>
+		    <field name="perm_create" eval="0"/>
+		    <field name="perm_unlink" eval="0" />
+		    <field name="domain_force">[('student_ids.user_id','=',user.id)]</field>
+		    <!-- Quy tắc để lọc các bản ghi ở model tại dòng 16 thỏa mãn điều kiện ở dòng số 22 thỏa mãn những user trong nhóm ở dòng số 17 -->
+		</record>
+		<record id="education_class_rule_academy_user" model="ir.rule">
+		    <field name="name">Academy user has all access with own class</field>
+		    <field name="model_id" ref="viindoo_academy.model_education_class"/>
+		    <field name="groups" eval="[(4, ref('viindoo_academy.group_user'))]"/>
+		    <field name="perm_read" eval="1"/>
+		    <field name="perm_write" eval="0"/>
+		    <field name="perm_create" eval="0"/>
+		    <field name="perm_unlink" eval="0" />
+		    <field name="domain_force">[('create_uid','=',user.id)]</field>
+		</record>
+<!-- 		<record id="education_class_rule_academy_administrator" model="ir.rule">
+		    <field name="name">Academy administrator has all access in Viindoo Academy</field>
+		    <field name="model_id" ref="viindoo_academy.model_education_class"/>
+		    <field name="groups" eval="[(4, ref('viindoo_academy.group_administrator'))]"/>
+		    <field name="domain_force">[(1,'=',1)]</field>
+		</record>
+		<record id="education_class_rule_academy_administrator" model="ir.rule">
+		    <field name="name">Academy administrator has all access in Viindoo Academy</field>
+		    <field name="model_id" ref="viindoo_academy.model_education_student"/>
+		    <field name="groups" eval="[(4, ref('viindoo_academy.group_administrator'))]"/>
+		    <field name="domain_force">[(1,'=',1)]</field>
+		</record>
+		<record id="education_class_rule_academy_administrator" model="ir.rule">
+		    <field name="name">Academy administrator has all access in Viindoo Academy</field>
+		    <field name="model_id" ref="viindoo_academy.model_res_ethnicty"/>
+		    <field name="groups" eval="[(4, ref('viindoo_academy.group_administrator'))]"/>
+		    <field name="domain_force">[(1,'=',1)]</field>
+		</record> -->		
+    </data>
+</odoo>

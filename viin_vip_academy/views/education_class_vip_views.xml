@@ -1,82 +1,108 @@
 <odoo>
-	<data>
+  <data>
+    <record id="education_class_vip_view_tree" model="ir.ui.view">
+        <field name="name">education.class.vip.tree</field>
+        <field name="model">education.class.vip</field>
+        <field name="arch" type="xml">
+            <tree string="Class Vip Tree">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="state"/>
+                 <field name="currency_id"/>
+                <field name="credit"/>                                
+            </tree>           
+        </field>        
+    </record>  
+    
+    <record id="education_class_vip_view_form" model="ir.ui.view">
+        <field name="name">education.class.vip.form</field>
+        <field name="model">education.class.vip</field>
+        <field name="arch" type="xml">
+            <form string="Class Form">
+                <header>
+       				<field name="state" widget="statusbar" />
+   				</header>
+                <sheet>
+	                <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"></widget>
+	                <field name="active" invisible="1"></field>
+	                <div class="oe_title">
+	                    <h1>
+	                        <field name="name" placeholder="Full Name"/>  
+	                    </h1>
+	                </div>
+	                
+	                <group>
+	                    <group>
+	                        <field name="active" invisible="1"/>                        
+	                    </group>
+	                    <group>
+	                        <field name="description" />
+	                    </group>
+	                    <group>
+	                        <field name="currency_id" />
+	                        <field name="credit" /> 
+	                    </group>	                
+	                </group>
+	                
+	                <notebook>
+	                    <page name='student' string='Student'>
+	                        <field name='student_ids'>
+	                            <tree>
+	                                <field name='name'></field>
+	                                <field name='create_date'/>
+	                                <field name='create_uid'/>
+	                            </tree>
+	                        </field>	                        
+	                    </page>
+	                    <page name='students' string='Historical Students Vip'>
+	                        <field name='historical_student_ids'>
+	                            <tree>
+	                                <field name='name'></field>
+	                                <field name='create_date'/>
+	                                <field name='create_uid'/>
+	                            </tree>
+	                        </field>		                    
+	                    </page>                
+	                </notebook>                
+	            </sheet>           
+            </form>       
+        </field>       
+    </record> 
 
-		<record id="education_class_vip_view_tree" model="ir.ui.view">
-			<field name="name">education.class.vip.tree</field>
-			<field name="model">education.class.vip</field>
-			<field name="arch" type="xml">
-				<tree string="Class Vip Tree">
-					<field name="name" />
-					<field name="description" />
-					<field name="start_date" />
-					<field name="end_date" />
-					<field name="state" />
-					<field name="credit" />
-				</tree>
-			</field>
-		</record>
+    
+    <record id="education_class_vip_view_search" model="ir.ui.view">
+        <field name="name">education.class.vip.search</field>
+        <field name="model">education.class.vip</field>
+        <field name="arch" type="xml">
+            <search string="Class Vip Search">
+                <field name="name"></field>
+                <field name="description"></field>
+                
+                <filter string="Draft" name="ftr_state_draft" domain="[('state','=','draft')]" />
+                <filter string="Confirmed" name="ftr_state_confirmed" domain="[('state','=','confirmed')]" />
+                <separator />
+                <filter string="Draft or Confirmed" name="ftr_draft_confirmed" domain="[('state','in',('draft','confirm'))]" />
+                <separator />
+                <filter string="Draft | Confirmed" name="ftr_draft_or_confirmed" domain="['|',('state','=','draft'),('state','=','confirm')]" />
+                
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="grp_state" context="{'group_by':'state'}" />
+                    <filter string="Create Date" name="grp_create_date" context="{'group_by':'create_date'}" />
+                </group>                
+            </search>
+        </field>      
+    
+    </record>
+    
+    <record id="education_class_vip_action" model="ir.actions.act_window">
+        <field name="name">Class</field>
+        <field name="res_model">education.class.vip</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
-		<record id="education_class_vip_view_form" model="ir.ui.view">
-			<field name="name">education.class.vip.form</field>
-			<field name="model">education.class.vip</field>
-			<field name="arch" type="xml">
-				<form string="Class Vip Form">
-					<header>
-						<field name="state" widget="statusbar" />
-					</header>
-					<sheet>
-						<widget name="web_ribbon" title="Archived"
-							bg_color="bg-danger"
-							attrs="{'invisible': [('active', '=', True)]}" />
-						<field name="active" invisible="1" />
-						<group>
-							<group>
-								<field name="name" />
-								<field name="start_date" />
-								<field name="end_date" />
-								<field name="credit" />
-							</group>
-						</group>
-						<group>
-							<field name="description" />
-						</group>
-						<notebook>
-							<page name="student" string="Students">
-								<field name="student_ids">
-									<tree>
-										<field name="name" />
-										<field name="create_date" />
-										<field name="create_uid" />
-									</tree>
-								</field>
-							</page>
-
-							<page name="students" string="Historical Students">
-								<field name="historical_student_ids">
-									<tree>
-										<field name="name" />
-										<field name="create_date" />
-										<field name="create_uid" />
-									</tree>
-								</field>
-							</page>
-						</notebook>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-		<record id="education_class_vip_action"
-			model="ir.actions.act_window">
-			<field name="name">Class Vip</field>
-			<field name="res_model">education.class.vip</field>
-			<field name="view_mode">tree,form</field>
-		</record>
-
-		<menuitem id="education_class_vip_menu"
-			action="education_class_vip_action"
-			parent="viindoo_academy.root_menu" sequence="10" />
-
-
-	</data>
+    <menuitem id="education_class_vip_menu" 
+        action="education_class_vip_action" 
+        sequence="10"
+        parent="vip_menu_root"/>
+  </data>
 </odoo>

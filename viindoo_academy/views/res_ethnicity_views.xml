@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+	    <record id="res_country_ethnicity_view_tree" model="ir.ui.view">
+	        <field name="name">res.ethnicity.tree</field>
+	        <field name="model">res.ethnicity</field>
+	        <field name="arch" type="xml">
+	            <tree string="Country Ethnicity Tree">
+	                <field name="name"/>
+	                <field name="country_ids" />
+	                <!-- <field name="description"/> -->
+	                                                
+	            </tree>           
+	        </field>        
+	    </record>  
+	    
+	    <record id="res_country_ethnicity_view_form" model="ir.ui.view">
+	        <field name="name">res.ethnicity.form</field>
+	        <field name="model">res.ethnicity</field>
+	        <field name="arch" type="xml">
+	            <form string="Country Ethnicity Form">
+					<sheet>
+					   <group>
+					   <field name="name" placeholder="Full Name"/>
+					   </group>
+					   <group>                    
+	                    <field name="country_ids" groups="base.group_user" />
+	                    <!-- với phân quyền này thì người k thuộc trong group này thì ngoài tree view có thể nhìn thấy trường country_ids nhưng vào trong form view sẽ không nhìn thấy  -->
+	                    </group>
+	                    <group>
+	                    <!-- <field name="description" /> -->
+	                    </group>
+                    </sheet>
+        		</form>
+        	</field>
+        </record>
+        
+	    <record id="res_country_ethnicity_view_search" model="ir.ui.view">
+	        <field name="name">res.ethnicity.search</field>
+	        <field name="model">res.ethnicity</field>
+	        <field name="arch" type="xml">
+	            <search string="Country Ethnicity search">
+	                <field name="name"></field>
+	                <field name="country_ids" />
+	                <!-- <field name="description"></field>	  -->                             
+	            </search>
+	        </field>
+	    </record>
+	    
+	    <record id="res_country_ethnicity_action" model="ir.actions.act_window">
+	        <field name="name">Ethnicity</field>
+	        <field name="res_model">res.ethnicity</field>
+	        <field name="view_mode">tree,form</field>
+	    </record>
+	
+	    <menuitem id="res_country_ethnicity_menu" 
+	        action="res_country_ethnicity_action" 
+	        sequence="10"
+	        parent="menu_root"/>    
+    </data>
+</odoo>

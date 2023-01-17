@@ -12,6 +12,7 @@
 						<field name="class_id" attrs="{'invisible': [('active_model','=','education.class')]}"/>
 						<field name="student_id" attrs="{'invisible': [('active_model','=','education.student')]}" />
 						<field name="active_model" invisible="1"/>
+						<field name="date"/>
 					</group>
 					<footer>
 						<button name="enroll" string="Enroll" type="object"
@@ -40,8 +41,8 @@
 					<field name="line_ids">
 						<tree editable="bottom">
 							<field name="registration_number" />
-							<field name="class_id" attrs="{'column_invisible': [('active_model','=','education.class')]}"/>
-							<field name="student_id" attrs="{'column_invisible': [('active_model','=','education.student')]}" />
+							<field name="student_id" attrs="{'column_invisible': [('active_model','=','education.student')]}"/>
+							<field name="class_id" attrs="{'column_invisible': [('active_model','=','education.class')]}" />
 							<field name="active_model" invisible="1"/>
 							<field name="date" />
 						</tree>
@@ -55,7 +56,7 @@
 				</form>
 			</field>
 		</record>
-		
+
 		<record id="education_enrollment_multi_class_action"
 			model="ir.actions.act_window">
 			<field name="name">Multi Enrollment Wizard</field>
@@ -64,7 +65,7 @@
 			<field name="target">new</field>
 			<field name="binding_model_id" ref="model_education_class" />
 		</record>
-		
+
 		<record id="education_enrollment_multi_student_action"
 			model="ir.actions.act_window">
 			<field name="name">Multi Enrollment Wizard</field>

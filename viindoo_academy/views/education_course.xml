@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+	    <record id="education_course_view_tree" model="ir.ui.view">
+	        <field name="name">education.course.tree</field>
+	        <field name="model">education.course</field>
+	        <field name="arch" type="xml">
+	            <tree string="Course Tree">
+	                <field name="name"/>
+	                <field name="description"/>
+	                <field name="class_ids" />
+ 	                <field name="student_ids" />	                                            
+	            </tree>           
+	        </field>        
+	    </record>  
+	    
+	    <record id="education_course_view_form" model="ir.ui.view">
+	        <field name="name">education.course.form</field>
+	        <field name="model">education.course</field>
+	        <field name="arch" type="xml">
+	            <form string="Course Form">
+					<sheet>
+						<group>
+					   		<field name="name"/>
+					   		<field name="description"/>
+					   	</group>
+					   	<notebook>
+						    <page name='Class'>                    
+		                   		<field name="class_ids" />
+		                    </page>
+		                    <page name='Student'>                    
+		                   		<field name="student_ids" />
+		                    </page>
+	                    </notebook>
+                    </sheet>
+        		</form>
+        	</field>
+        </record>
+        
+	    <record id="education_course_view_search" model="ir.ui.view">
+	        <field name="name">education.course.search</field>
+	        <field name="model">education.course</field>
+	        <field name="arch" type="xml">
+	            <search string="Course Search">
+	                <field name="name"></field>
+	                <field name="class_ids" />
+	                <field name="student_ids" />                          
+	            </search>
+	        </field>
+	    </record>
+	    
+	    <record id="education_course_action" model="ir.actions.act_window">
+	        <field name="name">Course</field>
+	        <field name="res_model">education.course</field>
+	        <field name="view_mode">tree,form</field>
+	    </record>
+	
+	    <menuitem id="education_course_menu" 
+	        action="education_course_action" 
+	        sequence="10"
+	        parent="menu_root"/>    
+    </data>
+</odoo>
